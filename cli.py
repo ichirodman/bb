@@ -6,6 +6,8 @@ import click
 
 from source.utils.m4a_file_to_csv_converter import M4AFileToCSVConverter
 from source.utils.data_explorer import DataExplorer
+from source.utils.data_csv_reader import DataCSVReader
+from source.infographics.fourier_transform_plot import FourierTransformPlot
 
 
 @click.group()
@@ -15,7 +17,8 @@ def cli():
 
 @click.command(name='main')
 def main():
-    print("Nothing to run")
+    data_reader = DataCSVReader(r'intact/New Recording 51.csv')
+    FourierTransformPlot.plot_and_show(data_reader)
 
 
 @click.command(name='sync_data')
