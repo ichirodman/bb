@@ -1,4 +1,5 @@
-import sys, os
+import sys
+import os
 
 sys.path.insert(0, os.path.abspath('.'))
 
@@ -8,6 +9,7 @@ from source.utils.m4a_file_to_csv_converter import M4AFileToCSVConverter
 from source.utils.data_explorer import DataExplorer
 from source.utils.data_csv_reader import DataCSVReader
 from source.infographics.fourier_transform_plot import FourierTransformPlot
+from source.ft.data_fourier_transformer import DataFourierTransformer
 
 
 @click.group()
@@ -18,7 +20,8 @@ def cli():
 @click.command(name='main')
 def main():
     data_reader = DataCSVReader(r'intact/New Recording 51.csv')
-    FourierTransformPlot.plot_and_show(data_reader)
+    fourier_transform = DataFourierTransformer.transform(data_reader)
+    FourierTransformPlot.plot_and_show(fourier_transform)
 
 
 @click.command(name='sync_data')

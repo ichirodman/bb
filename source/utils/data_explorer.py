@@ -8,7 +8,10 @@ import os
 class DataExplorer:
     @staticmethod
     def get_m4a_file_paths():
-        return DataExplorer.get_m4a_files_paths('damaged/') + DataExplorer.get_m4a_files_paths('intact/')
+        file_paths = []
+        for dir_type in os.listdir(M4A_SAMPLES_DIR_PATH.format('/')):
+            file_paths += DataExplorer.get_m4a_files_paths('{}'.format(dir_type))
+        return file_paths
 
     @staticmethod
     def get_m4a_files_paths(dir_type: str):
