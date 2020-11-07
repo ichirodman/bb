@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import plotly.express as px
 
-RELATIVE_PATH_TO_SAMPLES_DIR = './samples/'
+RELATIVE_PATH_TO_SAMPLES_DIR = './data/csv/intact/'
 RELATIVE_PATH_TO_OUTPUT_PLOTS_DIR = './infographics/output_plots/'
 
 
@@ -33,7 +33,7 @@ def get_path(file_name):
 def make_plot(file_name):
     file_path = get_path(file_name)
     df = pd.read_csv(file_path)
-    fig = px.line(df, x='x', y='y', title='Sound')
+    fig = px.line(df, x='Unnamed: 0', y='0', title='Sound')
     fig.show()
 
 
