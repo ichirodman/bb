@@ -7,9 +7,8 @@ import click
 
 from source.utils.m4a_file_to_csv_converter import M4AFileToCSVConverter
 from source.utils.data_explorer import DataExplorer
-from source.utils.data_csv_reader import DataCSVReader
-from source.infographics.fourier_transform_plot import FourierTransformPlot
-from source.ft.data_fourier_transformer import DataFourierTransformer
+from source.infographics.fourier_transform_plot import MultipleFourierTransformPlot
+from source.ft.data_fourier_transformer import MultipleDataFourierTransformer
 
 
 @click.group()
@@ -17,11 +16,13 @@ def cli():
     pass
 
 
-@click.command(name='main')
-def main():
-    data_reader = DataCSVReader(r'intact/New Recording 51.csv')
-    fourier_transform = DataFourierTransformer.transform(data_reader)
-    FourierTransformPlot.plot_and_show(fourier_transform)
+@click.command(name='show_multiple_ft_plot')
+def show_multiple_ft_plot():
+    fourier_transforms = list()
+    data_types = ['intact', 'damaged', 'slot']
+    for data_type in data_types:
+        fourier_transforms.append(MultipleDataFourierTransformer.get_fourier_transformed(data_type))
+    MultipleFourierTransformPlot.plot_and_show_on_one_axis(fourier_transforms, data_types)
 
 
 @click.command(name='sync_data')
@@ -31,7 +32,7 @@ def convert_all_data(force):
         M4AFileToCSVConverter.convert(file_name, force_converting=force)
 
 
-cli.add_command(main)
+cli.add_command(show_multiple_ft_plot)
 cli.add_command(convert_all_data)
 
 if __name__ == "__main__":

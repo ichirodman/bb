@@ -19,6 +19,11 @@ class DataExplorer:
         return [dir_type + '/' + i for i in os.listdir(directory_path) if i.split('.')[-1] == 'm4a']
 
     @staticmethod
+    def get_csv_files_paths(dir_type: str):
+        directory_path = CSV_SAMPLES_DIR_PATH.format(dir_type)
+        return [dir_type + '/' + i for i in os.listdir(directory_path) if i.split('.')[-1] == 'csv']
+
+    @staticmethod
     def file_exist(filename: str) -> bool:
         path = DataExplorer.get_path_for_name(filename)
         return Path(path).exists()
